@@ -19,8 +19,9 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/auth/', include('users.urls')),
-    path('api/', include('products.urls')),
-    path('api/', include('orders.urls')),
-    path('api/', include('payments.urls')),
+    path('users/', include('users.urls')),
+    path('products/', include('products.urls')),
+    path('orders/', include('orders.urls')),
+    path('payments/', include('payments.urls')),
+    path('', include('products.urls')),  # Default to product list
 ]

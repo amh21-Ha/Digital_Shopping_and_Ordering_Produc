@@ -1,7 +1,13 @@
-from rest_framework import viewsets
+from django.shortcuts import render, get_object_or_404
+from orders.models import Order
 from .models import Payment
-from .serializers import PaymentSerializer
 
-class PaymentViewSet(viewsets.ModelViewSet):
-    queryset = Payment.objects.all()
-    serializer_class = PaymentSerializer
+def payment(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    # Assume payment gateway integration here
+    amount = order.total
+    payment = Payment(order=order, amount=amount, status='Completed')
+    payment.save()
+    order.status = 'Completed'
+    order.save()
+    return render(request, 'payments/confirmation.html', {'order': order, 'payment': payment})

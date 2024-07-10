@@ -1,10 +1,6 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import PaymentViewSet
-
-router = DefaultRouter()
-router.register(r'payments', PaymentViewSet)
+from django.urls import path
+from .views import payment
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('payment/<int:order_id>/', payment, name='payment'),
 ]
