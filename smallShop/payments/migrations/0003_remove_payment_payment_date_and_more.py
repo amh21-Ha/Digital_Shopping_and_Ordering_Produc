@@ -3,7 +3,7 @@
 import datetime
 import django.db.models.deletion
 from django.db import migrations, models
-
+from datetime import datetime, timezone
 
 class Migration(migrations.Migration):
 
@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='payment',
             name='order',
-            field=models.ForeignKey(default=datetime.datetime(2024, 7, 11, 13, 37, 58, 172792, tzinfo=datetime.timezone.utc), on_delete=django.db.models.deletion.CASCADE, to='orders.order'),
+            field=models.IntegerField(default=int(datetime(2024, 7, 11, 13, 37, 58, 172792, tzinfo=timezone.utc).timestamp())),
             preserve_default=False,
         ),
         migrations.AddField(

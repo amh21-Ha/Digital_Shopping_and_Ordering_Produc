@@ -1,0 +1,41 @@
+<!-- users/some_view.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+</head>
+<body>
+    <h1>Welcome, {{ request.user.username }}!</h1>
+    <p>You have successfully logged in.</p>
+
+    <!-- Display Products -->
+    <h2>Products</h2>
+    <div>
+        {% for product in products %}
+            <div>
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 100px; height: 100px;">
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.description }}</p>
+                <p>Price: ${{ product.price }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Display Orders -->
+    <h2>Your Orders</h2>
+    <div>
+        {% for order in orders %}
+            <div>
+                <h3>Order #{{ order.id }}</h3>
+                <p>Ordered on: {{ order.date_ordered }}</p>
+                <ul>
+                    {% for item in order.items.all %}
+                        <li>{{ item.product.name }} - {{ item.quantity }} pcs</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+
